@@ -143,6 +143,7 @@ void GameCubePane::CreateWidgets()
            EXIDeviceType::EthernetXLink,
            EXIDeviceType::EthernetTapServer,
            EXIDeviceType::EthernetBuiltIn,
+           EXIDeviceType::EthernetNetPlayBBA, // ToDo. remove once NetPlayBBA is finished so users can't select for normal use.
 #if defined(WIN32) || (defined(__linux__) && !defined(__ANDROID__))
            EXIDeviceType::EthernetIPC,
 #endif
@@ -350,7 +351,8 @@ void GameCubePane::UpdateButton(ExpansionInterface::Slot slot)
                   device == ExpansionInterface::EXIDeviceType::EthernetXLink ||
                   device == ExpansionInterface::EXIDeviceType::EthernetTapServer ||
                   device == ExpansionInterface::EXIDeviceType::EthernetBuiltIn ||
-                  device == ExpansionInterface::EXIDeviceType::ModemTapServer);
+                  device == ExpansionInterface::EXIDeviceType::ModemTapServer ||
+                  device == ExpansionInterface::EXIDeviceType::EthernetNetPlayBBA);
     break;
   case ExpansionInterface::Slot::SP2:
     has_config = false;
@@ -411,6 +413,12 @@ void GameCubePane::OnConfigPressed(ExpansionInterface::Slot slot)
   case ExpansionInterface::EXIDeviceType::EthernetBuiltIn:
   {
     BroadbandAdapterSettingsDialog dialog(this, BroadbandAdapterSettingsDialog::Type::BuiltIn);
+    dialog.exec();
+    return;
+  }
+  case ExpansionInterface::EXIDeviceType::EthernetNetPlayBBA:
+  {  // Until NetPlayBBA settings are recieved from the NetPlay Host, this should be visible for testing.
+    BroadbandAdapterSettingsDialog dialog(this, BroadbandAdapterSettingsDialog::Type::NetPlayBBA);
     dialog.exec();
     return;
   }

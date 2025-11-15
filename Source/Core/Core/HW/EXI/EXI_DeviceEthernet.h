@@ -214,6 +214,7 @@ enum class BBADeviceType
   TAPSERVER,
   BuiltIn,
   IPC,
+  NetPlayBBA
 };
 
 class CEXIETHERNET : public IEXIDevice
@@ -514,6 +515,11 @@ private:
 
 #endif
   };
+
+    // will need to build the thing later 
+ // class NetPlayBBAInterface : public NetworkInterface
+
+  //{
 
   std::unique_ptr<NetworkInterface> m_network_interface;
 

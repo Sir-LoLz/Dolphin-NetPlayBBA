@@ -184,6 +184,10 @@ std::unique_ptr<IEXIDevice> EXIDevice_Create(Core::System& system, const EXIDevi
   default:
     result = std::make_unique<IEXIDevice>(system);
     break;
+
+  case EXIDeviceType::EthernetNetPlayBBA:
+    result = std::make_unique<CEXIETHERNET>(system, BBADeviceType::NetPlayBBA);
+    break;
   }
 
   if (result != nullptr)

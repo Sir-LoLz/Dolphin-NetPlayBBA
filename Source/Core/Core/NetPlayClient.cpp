@@ -394,6 +394,8 @@ void NetPlayClient::OnData(sf::Packet& packet)
     OnPadData(packet);
     break;
 
+    // note to self. NetPlayBBA should be here
+
   case MessageID::PadHostData:
     OnPadHostData(packet);
     break;

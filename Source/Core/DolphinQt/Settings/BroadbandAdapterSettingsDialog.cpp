@@ -92,6 +92,25 @@ void BroadbandAdapterSettingsDialog::InitControls()
                       "href=\"https://www.teamxlink.co.uk/wiki/Dolphin\">refer to this page</a>."));
     window_title = tr("XLink Kai BBA Destination Address");
     break;
+
+    case Type::NetPlayBBA:
+      // The NetPlayBBA should not be selectable in it's finished state. And the NetPlay Host will send
+      // their MAC address for peers to use. But until it is finished users will need to change their MAC
+      // address for testing purposes. Bellow is copied from the Ethernet case.
+
+      // i18n: MAC stands for Media Access Control. A MAC address uniquely identifies a network
+      // interface (physical) like a serial number. "MAC" should be kept in translations.
+      address_label = new QLabel(tr("Enter new Broadband Adapter MAC address: (NetPlayBBA)"));
+      address_placeholder = QString::fromStdString("aa:bb:cc:dd:ee:ff");
+      current_address = QString::fromStdString(Config::Get(Config::MAIN_BBA_MAC));
+      description = new QLabel(tr("For setup instructions, <a "
+                                  "href=\"https://wiki.dolphin-emu.org/"
+                                  "index.php?title=Broadband_Adapter\">refer to this page</a>."));
+
+      // i18n: MAC stands for Media Access Control. A MAC address uniquely identifies a network
+      // interface (physical) like a serial number. "MAC" should be kept in translations.
+      window_title = tr("Broadband Adapter MAC Address (NetPlayBBA");
+    break;
   }
 
   setWindowTitle(window_title);
@@ -150,6 +169,12 @@ void BroadbandAdapterSettingsDialog::SaveAddress()
     break;
   case Type::XLinkKai:
     Config::SetBaseOrCurrent(Config::MAIN_BBA_XLINK_IP, bba_new_address);
+    break;
+  case Type::NetPlayBBA:
+    // The NetPlayBBA should be able to save a MAC address recieved from the NetPlay host,
+    // so no action is needed here. But I am leaving it in for completeness. Odds are
+    // I will take it out once I finish NetPlay BBA support.
+    Config::SetBaseOrCurrent(Config::MAIN_BBA_MAC, bba_new_address);
     break;
   }
 

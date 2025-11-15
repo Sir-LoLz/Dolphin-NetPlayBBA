@@ -153,6 +153,8 @@ enum class MessageID : u8
   PadBuffer = 0x62,
   PadHostData = 0x63,
   GBAConfig = 0x64,
+    // note to self NetPlayBBA should be here
+  
 
   WiimoteData = 0x70,
   WiimoteMapping = 0x71,

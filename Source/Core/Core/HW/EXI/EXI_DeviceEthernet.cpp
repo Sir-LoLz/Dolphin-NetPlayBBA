@@ -88,6 +88,10 @@ CEXIETHERNET::CEXIETHERNET(Core::System& system, BBADeviceType type) : IEXIDevic
     INFO_LOG_FMT(SP1, "Created XLink Kai BBA network interface connection to {}:34523",
                  Config::Get(Config::MAIN_BBA_XLINK_IP));
     break;
+
+  case BBADeviceType::NetPlayBBA:
+    INFO_LOG_FMT(SP1, "NetPlayBBA did a thing.");
+    break;
   }
 
   tx_fifo = std::make_unique<u8[]>(BBA_TXFIFO_SIZE);
